@@ -10,7 +10,7 @@
                  [compojure "1.6.1"]
                  [hiccup "1.0.5"]
                  [com.auth0/auth0 "1.14.2"]]
+  :repl-options {:init-ns user}
   :plugins [[lein-ring "0.12.5"]]
-  :ring {:handler auth0-clojure-sample.core/app}
   :target-path "target/%s"
-  :profiles {:dev {:main auth0-clojure-sample.core/-main}})
+  :ring {:handler auth0-clojure-sample.core/handler})
