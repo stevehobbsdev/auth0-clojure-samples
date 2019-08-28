@@ -5,7 +5,7 @@
 
 (defn go
   []
-  (reset! server (core/-main 3000)))
+  (reset! server (core/-dev-main)))
 
 (defn stop
   []
