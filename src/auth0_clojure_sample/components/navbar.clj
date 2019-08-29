@@ -21,6 +21,13 @@
         (filter #(true? (last %)))
         (map #(nav-list-item (nav-link %))))])
 
+(def anonymous-menu
+  (nav-list-item
+   [:a#qsLoginBtn.btn.btn-primary.btn-margin {:href "/login"} "Log in"]))
+
+(def user-menu
+  "Hello")
+
 (defn html [authenticated?]
   [:div.navbar-container
    [:nav.navbar.navbar-expand-md.navbar-light.bg-light
@@ -29,11 +36,11 @@
      navbar-button
      [:div.collapse.navbar-collapse {:id "navbarNav"}
       (navbar-links
-       ["/" "Home" true]
-       ["/login" "Log in" authenticated?])
+       ["/" "Home" true])
       [:ul.navbar-nav.d-none.d-md-block
-       (nav-list-item
-        [:a#qsLoginBtn.btn.btn-primary.btn-margin {:href "/login"} "Log in"])]]]]])
+       (if authenticated?
+         user-menu
+         anonymous-menu)]]]]])
 
 (comment
   (h navbar)

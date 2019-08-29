@@ -11,7 +11,7 @@
    :js ["https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"]})
 
 (defn default
-  [title & body]
+  [title logged-in & body]
   (html5 {:class "h-100"}
          [:head
           [:meta {:charset "utf-8"}]
@@ -20,7 +20,7 @@
           [:base {:href "/"}]
           (map include-css (assets :css))]
          [:body {:class "h-100"}
-          (navbar/html false)
+          (navbar/html logged-in)
           [:div {:class "d-flex flex-column h-100"}
            [:div {:class "flex-grow-1 flex-shrink-1 container"}
             body]

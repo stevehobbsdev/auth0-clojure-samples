@@ -40,8 +40,8 @@
   [:div {:class "d-flex justify-content-between flex-wrap"}
    (map content-panel content-panel-data)])
 
-(defn index []
-  (layouts/default "Auth0 Clojure Sample"
+(defn index [logged-in]
+  (layouts/default "Auth0 Clojure Sample" logged-in
     index-hero
     [:div {:class "next-steps"}
      [:h2 {:class "mt-5 text-center"} "What can I do?"]
