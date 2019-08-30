@@ -25,10 +25,14 @@
   (nav-list-item
    [:a#qsLoginBtn.btn.btn-primary.btn-margin {:href "/login"} "Log in"]))
 
-(def user-menu
-  "Hello")
+(defn- user-image [profile]
+  [:img {:src (profile :picture) :class "nav-user-profile rounded-circle" :style "width: 75px"}])
 
-(defn html [authenticated?]
+(defn- user-menu [profile]
+  (user-image profile))
+
+(defn html [profile]
+  (println profile)
   [:div.navbar-container
    [:nav.navbar.navbar-expand-md.navbar-light.bg-light
     [:div.container
@@ -38,8 +42,8 @@
       (navbar-links
        ["/" "Home" true])
       [:ul.navbar-nav.d-none.d-md-block
-       (if authenticated?
-         user-menu
+       (if profile
+         (user-menu profile)
          anonymous-menu)]]]]])
 
 (comment

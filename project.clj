@@ -11,7 +11,6 @@
                  [hiccup "1.0.5"]
                  [com.auth0/auth0 "1.14.2"]]
   :repl-options {:init-ns user}
-  ; :plugins [[lein-ring "0.12.5"]]
   :target-path "target/%s"
   :main auth0-clojure-sample.core
   :profiles {:dev {:source-paths ["dev" "src"]

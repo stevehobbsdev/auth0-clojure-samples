@@ -8,18 +8,14 @@
 (def login-redirect-url
   "https://elkdanger.eu.auth0.com/authorize")
 
-(defn handle-login [code]
-  (-> (auth/handle-callback code)
-      (.getIdToken)))
-
 (defroutes app-routes
-  (GET "/" {{:keys [logged-in]} :session} (views/index logged-in))
+  (GET "/" {{:keys [auth]} :session} (views/index (when auth (auth :user-info))))
   (GET "/profile" [] "<h1>Profile</h1>")
   (GET "/login" [] (redirect (auth/login-url)))
   (GET "/logout" [] "<h1>Loggig out..</h1>")
   (GET "/callback" [code :as {session :session}]
-    (let [token (handle-login code)
-          session (assoc session :logged-in true)]
+    (let [data (auth/handle-callback code)
+          new-session (assoc session :auth data)]
       (-> (redirect "/")
-          (assoc :session session))))
+          (assoc :session new-session))))
   (route/not-found "<h1>Page not found</h1>"))

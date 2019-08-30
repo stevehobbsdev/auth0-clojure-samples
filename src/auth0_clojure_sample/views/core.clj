@@ -6,7 +6,8 @@
   [:div {:class "text-center hero my-5"}
    [:img {:class "mb-3 app-logo" :src "/logo.png" :alt "Clojure logo"}]
    [:h1 {:class "mb-4"} "Clojure Sample Project"]
-   [:p.lead "This is a sample application demonstrating the authentication flow, using Clojure"]])
+   [:p.lead "This is a sample application demonstrating the authentication flow, using "
+    [:a {:href "https://clojure.org/"} "Clojure"]]])
 
 (def content-panel-data
   [{:title "Configure other identity providers"
@@ -40,9 +41,13 @@
   [:div {:class "d-flex justify-content-between flex-wrap"}
    (map content-panel content-panel-data)])
 
-(defn index [logged-in]
-  (layouts/default "Auth0 Clojure Sample" logged-in
+(defn index [profile]
+  (layouts/default "Auth0 Clojure Sample" profile
     index-hero
     [:div {:class "next-steps"}
      [:h2 {:class "mt-5 text-center"} "What can I do?"]
      index-content]))
+
+(comment
+  (index {:sub "123" :email "steve@elkdanger.co.uk"})
+  (index nil))
