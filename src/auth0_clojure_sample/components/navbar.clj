@@ -1,6 +1,4 @@
-(ns auth0-clojure-sample.components.navbar
-  (:require [hiccup.element :refer [link-to]])
-  (:require [hiccup.core :as h]))
+(ns auth0-clojure-sample.components.navbar)
 
 (def navbar-button
   [:button {:class "navbar-toggler"
@@ -21,7 +19,14 @@
         (filter #(true? (last %)))
         (map #(nav-list-item (nav-link %))))])
 
-(defn html [authenticated?]
+(defn anonymous-menu []
+  [:a#qsLoginBtn.btn.btn-primary.btn-margin {:href "/login"} "Log in"])
+
+(defn user-menu [profile]
+  (println profile)
+  (str "Logged in as " (:name profile)))
+
+(defn html [profile]
   [:div.navbar-container
    [:nav.navbar.navbar-expand-md.navbar-light.bg-light
     [:div.container
@@ -29,13 +34,7 @@
      navbar-button
      [:div.collapse.navbar-collapse {:id "navbarNav"}
       (navbar-links
-       ["/" "Home" true]
-       ["/login" "Log in" authenticated?])
+       ["/" "Home" true])
       [:ul.navbar-nav.d-none.d-md-block
        (nav-list-item
-        [:a#qsLoginBtn.btn.btn-primary.btn-margin {:href "/login"} "Log in"])]]]]])
-
-(comment
-  (h navbar)
-  (h (navbar-links {:url "/"}))
-  (h footer))
+        (if profile (user-menu profile) (anonymous-menu)))]]]]])

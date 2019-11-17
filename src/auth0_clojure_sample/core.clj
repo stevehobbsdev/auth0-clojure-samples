@@ -1,11 +1,15 @@
 (ns auth0-clojure-sample.core
   (:gen-class)
-  (:require [ring.adapter.jetty :as jetty]
-            [ring.middleware.defaults :refer :all]
-            [ring.middleware.session :refer :all]
-            [auth0-clojure-sample.routing :refer :all]))
+  (:require
+   [ring.middleware.defaults :refer [site-defaults, wrap-defaults]]
+   [ring.middleware.session :refer [wrap-session]]
+   [auth0-clojure-sample.routing :refer [app-routes]]))
+
+(def app-defaults
+  (-> site-defaults
+      (assoc-in [:session :cookie-attrs :same-site] :lax)))
 
 (def app
   (-> app-routes
-      (wrap-session)
-      (wrap-defaults site-defaults)))
+      (wrap-defaults app-defaults)
+      wrap-session))

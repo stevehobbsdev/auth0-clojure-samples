@@ -9,8 +9,8 @@
                  [ring/ring-jetty-adapter "1.7.1"]
                  [compojure "1.6.1"]
                  [hiccup "1.0.5"]
-                 [com.auth0/auth0 "1.14.2"]]
+                 [com.auth0/auth0 "1.14.2"]
+                 [com.auth0/java-jwt "3.8.2"]]
   :plugins [[lein-ring "0.12.5"]]
   :ring {:handler auth0-clojure-sample.core/app}
-  :target-path "target/%s"
-  :profiles {:dev {:main auth0-clojure-sample.core/-main}})
+  :target-path "target/%s")

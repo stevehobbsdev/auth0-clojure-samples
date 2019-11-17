@@ -1,5 +1,6 @@
-(ns auth0-clojure-sample.views.core
+(ns auth0-clojure-sample.views.index
   (:require [auth0-clojure-sample.views.layouts :as layouts]
+            [auth0-clojure-sample.views.components :as components]
             [hiccup.element :refer [link-to]]))
 
 (def index-hero
@@ -22,26 +23,20 @@
     :url "https://auth0.com/docs/connections"
     :content "Auth0 supports social providers as Facebook, Twitter, Instagram and 100+, Enterprise providers as Microsoft Office 365, Google Apps, Azure, and more. You can also use any OAuth2 Authorization Server."}])
 
-(defn icon [name]
-  [:i {:class (str "mr-2 fa fa-" name)}])
-
-(def link-icon
-  (icon "link"))
-
 (defn- content-panel [{url :url
                        title :title
                        content :content}]
   [:div.content-panel
    [:h5 {:class "mb-3"}
-    (link-to url link-icon title)]
+    (link-to url components/link-icon title)]
    [:p content]])
 
 (def index-content
   [:div {:class "d-flex justify-content-between flex-wrap"}
    (map content-panel content-panel-data)])
 
-(defn index []
-  (layouts/default "Auth0 Clojure Sample"
+(defn page [profile]
+  (layouts/default "Auth0 Clojure Sample" profile
     index-hero
     [:div {:class "next-steps"}
      [:h2 {:class "mt-5 text-center"} "What can I do?"]
