@@ -35,7 +35,7 @@
   [:div {:class "d-flex justify-content-between flex-wrap"}
    (map content-panel content-panel-data)])
 
-(defn page [profile]
+(defn html [profile]
   (layouts/default "Auth0 Clojure Sample" profile
     index-hero
     [:div {:class "next-steps"}

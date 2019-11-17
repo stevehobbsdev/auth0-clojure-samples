@@ -18,7 +18,7 @@
     (fn profile)))
 
 (defroutes app-routes
-  (GET "/" {session :session} (wrap-auth session index/page))
+  (GET "/" {session :session} (wrap-auth session index/html))
   (GET "/profile" [] "<h1>Profile</h1>")
   (GET "/login" [] (redirect (auth/login-url)))
   (GET "/logout" [] "<h1>Logging out..</h1>")
@@ -26,5 +26,5 @@
     (let [token (handle-login code)
           session (assoc session :token token)]
       ; (println (auth/get-user-profile token))
-      (assoc (redirect "/") :cookies {:loggedin true} :session session)))
+      (assoc (redirect "/") :session session)))
   (route/not-found "<h1>Page not found</h1>"))
