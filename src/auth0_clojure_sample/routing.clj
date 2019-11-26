@@ -13,6 +13,7 @@
       (.getIdToken)))
 
 (defn wrap-auth [session fn]
+  (println session)
   (let [profile (when (:token session) (auth/get-user-profile (:token session)))]
     (println profile)
     (fn profile)))
