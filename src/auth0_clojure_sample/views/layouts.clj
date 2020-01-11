@@ -4,7 +4,7 @@
             [auth0-clojure-sample.components.footer :as footer]))
 
 (def assets
-  {:css ["https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+  {:css ["/bootstrap.css"
          "https://cdn.auth0.com/js/auth0-samples-theme/1.0/css/auth0-theme.min.css"
          "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
          "/main.css"]
