@@ -3,7 +3,8 @@
   (:require
    [ring.middleware.defaults :refer [site-defaults, wrap-defaults]]
    [ring.middleware.session :refer [wrap-session]]
-   [auth0-clojure-sample.routing :refer [app-routes]]))
+   [auth0-clojure-sample.routing :refer [app-routes]]
+   [auth0-clojure-sample.middleware :refer [wrap-user]]))
 
 (def app-defaults
   (-> site-defaults
@@ -11,5 +12,6 @@
 
 (def app
   (-> app-routes
+      wrap-user
       (wrap-defaults app-defaults)
-      wrap-session))
+      ))

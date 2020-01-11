@@ -36,6 +36,7 @@
    (map content-panel content-panel-data)])
 
 (defn html [profile]
+  (println profile)
   (layouts/default "Auth0 Clojure Sample" profile
     index-hero
     [:div {:class "next-steps"}
