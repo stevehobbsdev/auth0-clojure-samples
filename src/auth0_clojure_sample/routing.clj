@@ -8,7 +8,11 @@
             ))
 
 (def login-redirect-url
-  "https://elkdanger.eu.auth0.com/authorize")
+  (format "https://%s/authorize" (:domain auth/config)))
+
+(defn logout-url [return-to]
+  (format "https://%s/v2/logout?returnTo=%s&client_id=%s"
+    (:domain auth/config) return-to (:client-id auth/config)))
 
 (defn handle-login [code]
   (-> (auth/handle-callback code)
@@ -18,12 +22,13 @@
   (GET "/" {user :user} (index/html user))
   (GET "/profile" [] "<h1>Profile</h1>")
   (GET "/login" [] (redirect (auth/login-url)))
-  (GET "/logout" [] "<h1>Logging out..</h1>")
+  (GET "/logout" {host-url :host-url}
+    (-> (redirect (logout-url host-url))
+        (assoc :session nil)))
   (GET "/callback" [code :as {session :session}]
-    (let [session 
-          (->> (handle-login code)
-              auth/get-user-profile
-              json/write-str
-              (assoc session :user-profile))]
-      (assoc (redirect "/") :session session)))
+    (->> (handle-login code)
+        auth/get-user-profile
+        json/write-str
+        (assoc session :user-profile)
+        (assoc (redirect "/") :session)))
   (route/not-found "<h1>Page not found</h1>"))

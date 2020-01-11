@@ -4,8 +4,8 @@
 
 (def config
   {:domain "elkdanger.eu.auth0.com"
-   :client-id "nw1AjlUNOiVfKGQpfvQ69q7k9YQhtZ0M"
-   :client-secret "OzAFPFyXVBOoge69UBk-q_RNecs_TL5fz11YDlzIX7pBeM065asQRqAlTaDsC8KQ"})
+   :client-id "ekeB7UMYW2EGE7wuWcIFVBkZQRs7wsSu"
+   :client-secret "j6Z0t-0FuYkoRWyfp5AYxVV_T9P3Fd5iy5l-p1ZsDh8SWEsDMRlE5Jl2ForqjniV"})
 
 (defn api []
   "Creates the Auth0 API object"
