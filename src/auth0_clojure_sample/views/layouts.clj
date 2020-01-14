@@ -7,9 +7,12 @@
   {:css ["/bootstrap.css"
          "https://cdn.auth0.com/js/auth0-samples-theme/1.0/css/auth0-theme.min.css"
          "https://stackpath.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css"
+         "//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/styles/default.min.css"
          "/main.css"]
    :js ["https://code.jquery.com/jquery-3.2.1.slim.min.js"
-        "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"]})
+        "https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js"
+        "//cdn.jsdelivr.net/gh/highlightjs/cdn-release@9.17.1/build/highlight.min.js"
+        "/app.js"]})
 
 (defn default
   [title profile & body]

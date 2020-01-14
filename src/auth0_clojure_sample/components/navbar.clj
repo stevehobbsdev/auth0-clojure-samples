@@ -1,5 +1,6 @@
 (ns auth0-clojure-sample.components.navbar
-  (:require [hiccup.core :as hc]))
+  (:require [hiccup.core :as hc]
+            [auth0-clojure-sample.components.profile-image :as img]))
 
 (def navbar-button
   [:button {:class "navbar-toggler"
@@ -23,10 +24,6 @@
         (filter #(true? (last %)))
         (map #(nav-list-item (nav-link %))))])
 
-(defn profile-picture [url & [alt]]
-  [:img.nav-user-profile.rounded-circle
-   {:src url :alt (or alt "Profile picture") :style "width: 75px"}])
-
 (defn anonymous-menu []
   (nav-list-item
    [:a#qsLoginBtn.btn.btn-primary.btn-margin {:href "/login"} "Log in"]))
@@ -34,7 +31,7 @@
 (defn user-menu [profile]
   (nav-list-item {:class "dropdown"}
                  [:a.nav-link.dropdown-toggle {:id "profileDropDown" :data-toggle "dropdown" :href "#"}
-                  (profile-picture (:picture profile))]
+                  (img/nav (:picture profile))]
                  [:div.dropdown-menu.dropdown-menu-left
                   [:div.dropdown-header (:name profile)]
                   [:a.dropdown-item.dropdown-profile {:href "/profile"} (icon "user" "mr-3") "Profile"]
@@ -53,8 +50,8 @@
        (if profile (user-menu profile) (anonymous-menu))]]]]])
 
 (comment
-  (hc/html (profile-picture "image.jpg"))
-  (hc/html (profile-picture "image.jpg" "This is a demo picture"))
+  (hc/html (img/nav "image.jpg"))
+  (hc/html (img/nav "image.jpg" "This is a demo picture"))
   (hc/html (nav-list-item "Hello"))
   (hc/html (nav-list-item {:class "test"} [:li.dropdown [:a {:href "#"} "This is a link"]]))
   (hc/html (user-menu {:picture "http://my-img" :name "Demo User"}))
