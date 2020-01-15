@@ -3,6 +3,7 @@
             [compojure.route :as route]
             [auth0-clojure-sample.views.index :as index]
             [auth0-clojure-sample.views.profile :as profile]
+            [auth0-clojure-sample.views.layouts :as layout]
             [ring.util.response :refer [redirect]]
             [auth0-clojure-sample.auth0 :as auth]
             [cheshire.core :refer [generate-string]]))
@@ -18,9 +19,12 @@
   (-> (auth/handle-callback code)
       (.getIdToken)))
 
+(defn l [request body]
+  (layout/default "Auth0 Clojure Sample" (:user request) body))
+
 (defroutes app-routes
-  (GET "/" {user :user} (index/html user))
-  (GET "/profile" {user :user} (profile/html user))
+  (GET "/" request (l request (index/html)))
+  (GET "/profile" {user :user :as request} (l request (profile/html user)))
   (GET "/login" [] (redirect (auth/login-url)))
   (GET "/logout" {host-url :host-url}
     (-> (redirect (logout-url host-url))
