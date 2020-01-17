@@ -1,4 +1,4 @@
-(ns auth0-clojure-sample..auth0-test
+(ns auth0-clojure-sample.auth0-test
   (:require [clojure.test :refer :all]
             [auth0-clojure-sample.auth0 :as auth0]))
 
