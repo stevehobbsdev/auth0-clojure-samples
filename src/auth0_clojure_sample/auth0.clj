@@ -7,19 +7,22 @@
    :client-id "ekeB7UMYW2EGE7wuWcIFVBkZQRs7wsSu"
    :client-secret "j6Z0t-0FuYkoRWyfp5AYxVV_T9P3Fd5iy5l-p1ZsDh8SWEsDMRlE5Jl2ForqjniV"})
 
-(defn api []
+(defn api
   "Creates the Auth0 API object"
+  []
   (AuthAPI. (config :domain) (config :client-id) (config :client-secret)))
 
-(defn handle-callback [code]
+(defn handle-callback
   "Exchanges the authorization code for the tokens"
+  [code]
   (-> (api)
       (.exchangeCode code "http://localhost:3000/callback")
       (.setScope "openid profile email")
       (.execute)))
 
-(defn login-url []
+(defn login-url
   "Builds a URL that the user should redirect to for login"
+  []
   (-> (api)
       (.authorizeUrl "http://localhost:3000/callback")
       (.withScope "openid profile email")
