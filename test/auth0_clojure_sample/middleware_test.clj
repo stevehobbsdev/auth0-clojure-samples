@@ -1,5 +1,5 @@
 (ns auth0-clojure-sample.middleware-test
-  (:require [clojure.test :refer :all]
+  (:require [clojure.test :refer [deftest is testing]]
             [auth0-clojure-sample.middleware :as middleware]))
 
 (def default-handler

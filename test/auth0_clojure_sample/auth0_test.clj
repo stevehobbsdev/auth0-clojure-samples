@@ -1,5 +1,5 @@
 (ns auth0-clojure-sample.auth0-test
-  (:require [clojure.test :refer :all]
+  (:require [clojure.test :refer [deftest is testing]]
             [auth0-clojure-sample.auth0 :as auth0]))
 
 (deftest config-doman
