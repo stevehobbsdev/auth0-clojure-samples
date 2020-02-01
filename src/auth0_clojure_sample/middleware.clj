@@ -23,11 +23,16 @@ easy consumption."
    "/login"
    "/callback"])
 
+(defn public-path?
+  "Returns true if the given path can be accessed anonymously"
+  [path]
+  (some #(= path %) public-paths))
+
 (defn wrap-authorize
-  "Prevents access to a route if the user is not logged in"
+  "Prevents access to a route if the user is not logged in, or the route is public"
   [handler]
   (fn [{uri :uri user :user :as request}]
-    (if (or user (some #(= uri %) public-paths))
+    (if (or user (public-path? uri))
       (handler request)
       {:status 401
        :headers {}})))
