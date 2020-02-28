@@ -11,7 +11,17 @@
                  [compojure "1.6.1"]
                  [hiccup "1.0.5"]
                  [com.auth0/auth0 "1.14.2"]
-                 [com.auth0/java-jwt "3.8.2"]]
-  :plugins [[lein-ring "0.12.5"]]
+                 [com.auth0/java-jwt "3.8.2"]
+                 [environ "1.1.0"]]
+  :plugins [[lein-ring "0.12.5"]
+            [lein-environ "1.1.0"]
+            [lein-pprint "1.2.0"]]
   :ring {:handler auth0-clojure-sample.core/app}
-  :target-path "target/%s")
+  :target-path "target/%s"
+  :profiles {:dev [:project/dev :profiles/dev]
+             :test [:project/test :profiles/test]
+           ;; only edit :profiles/* in profiles.clj
+             :profiles/dev  {}
+             :profiles/test {}
+             :project/dev {}
+             :project/test {}})

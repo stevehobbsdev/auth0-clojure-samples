@@ -1,12 +1,13 @@
 (ns auth0-clojure-sample.auth0
   (:import [com.auth0.client.auth AuthAPI]
            [com.auth0.jwt JWT])
-  (:require [auth0-clojure-sample.util :refer [hash-to-map]]))
+  (:require [auth0-clojure-sample.util :refer [hash-to-map]]
+            [environ.core :refer [env]]))
 
 (def config
-  {:domain "elkdanger.eu.auth0.com"
-   :client-id "ekeB7UMYW2EGE7wuWcIFVBkZQRs7wsSu"
-   :client-secret "j6Z0t-0FuYkoRWyfp5AYxVV_T9P3Fd5iy5l-p1ZsDh8SWEsDMRlE5Jl2ForqjniV"})
+  {:domain (env :auth-domain)
+   :client-id (env :auth-client-id)
+   :client-secret (env :auth-client-secret)})
 
 (defn api
   "Creates the Auth0 API object"
