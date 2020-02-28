@@ -4,16 +4,15 @@ on: [push]
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
 
     steps:
-      env: # Or as an environment variable
-        AUTH_DOMAIN: ${{ secrets.AUTH_DOMAIN }}
-        AUTH_CLIENT_ID: ${{ secrets.AUTH_CLIENT_ID }}
-        AUTH_CLIENT_SECRET: ${{ secrets.AUTH_CLIENT_SECRET }}
-    - uses: actions/checkout@v2
-    - name: Install dependencies
-      run: lein deps
-    - name: Run tests
-      run: lein test
+      - uses: actions/checkout@v2
+      - name: Install dependencies
+        run: lein deps
+      - name: Run tests
+        env: # Or as an environment variable
+          AUTH_DOMAIN: ${{ secrets.AUTH_DOMAIN }}
+          AUTH_CLIENT_ID: ${{ secrets.AUTH_CLIENT_ID }}
+          AUTH_CLIENT_SECRET: ${{ secrets.AUTH_CLIENT_SECRET }}
+        run: lein test
