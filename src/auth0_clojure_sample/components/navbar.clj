@@ -19,14 +19,13 @@
   [:a.nav-link {:href url} name])
 
 (defn navbar-links [& links]
-  [:ul.navbar-nav.mr-auto
-   (->> links
-        (filter #(true? (last %)))
-        (map #(nav-list-item (nav-link %))))])
+  (->> links
+       (filter #(true? (last %)))
+       (map #(nav-list-item (nav-link %)))))
 
 (defn anonymous-menu []
   (nav-list-item
-   [:a#qsLoginBtn.btn.btn-primary.btn-margin {:href "/login"} "Log in"]))
+   [:a#qsLoginBtn.btn.btn-primary.btn-margin.w-md-100 {:href "/login"} "Log in"]))
 
 (defn user-menu [profile]
   (nav-list-item {:class "dropdown"}
@@ -44,10 +43,12 @@
      [:div.navbar-brand.logo]
      navbar-button
      [:div.collapse.navbar-collapse {:id "navbarNav"}
-      (navbar-links
-       ["/" "Home" true])
-      [:ul.navbar-nav.d-none.d-md-block
-       (if profile (user-menu profile) (anonymous-menu))]]]]])
+      [:ul.navbar-nav.mr-auto
+       (navbar-links
+        ["/" "Home" true])]
+      [:ul.navbar-nav.ml-auto
+       (if profile (user-menu profile) (anonymous-menu))]
+      ]]]])
 
 (comment
   (hc/html (img/nav "image.jpg"))

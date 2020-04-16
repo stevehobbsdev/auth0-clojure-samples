@@ -7,7 +7,7 @@
 
 (def app-defaults
   (-> site-defaults
-      (assoc-in [:session :cookie-attrs :same-site] :none)))
+      (assoc-in [:session :cookie-attrs :same-site] :lax)))
 
 (def app
   (-> app-routes
