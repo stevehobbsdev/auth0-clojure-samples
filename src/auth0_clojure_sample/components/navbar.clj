@@ -18,11 +18,6 @@
 (defn- nav-link [[url name]]
   [:a.nav-link {:href url} name])
 
-(defn navbar-links [& links]
-  (->> links
-       (filter #(true? (last %)))
-       (map #(nav-list-item (nav-link %)))))
-
 (defn anonymous-menu []
   (nav-list-item
    [:a#qsLoginBtn.btn.btn-primary.btn-margin.w-md-100 {:href "/login"} "Log in"]))
@@ -35,7 +30,6 @@
                   [:div.dropdown-header (:name profile)]
                   [:a.dropdown-item.dropdown-profile {:href "/profile"} (icon "user" "mr-3") "Profile"]
                   [:a.dropdown-item {:href "/logout"} (icon "power-off" "mr-3") "Log out"]]))
-
 
 (defn user-menu-mobile
   "A menu that shows only on mobile devices"
