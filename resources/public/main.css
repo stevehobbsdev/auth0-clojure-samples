@@ -16,3 +16,7 @@
     width: 45%;
   }
 }
+
+.mobile-menu li.nav-item a.nav-link {
+  padding: 0;
+}

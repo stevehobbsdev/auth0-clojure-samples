@@ -27,14 +27,28 @@
   (nav-list-item
    [:a#qsLoginBtn.btn.btn-primary.btn-margin.w-md-100 {:href "/login"} "Log in"]))
 
-(defn user-menu [profile]
-  (nav-list-item {:class "dropdown"}
+(defn user-menu-dropdown [profile]
+  (nav-list-item {:class "dropdown d-none d-md-block"}
                  [:a.nav-link.dropdown-toggle {:id "profileDropDown" :data-toggle "dropdown" :href "#"}
                   (img/nav (:picture profile))]
                  [:div.dropdown-menu.dropdown-menu-left
                   [:div.dropdown-header (:name profile)]
                   [:a.dropdown-item.dropdown-profile {:href "/profile"} (icon "user" "mr-3") "Profile"]
                   [:a.dropdown-item {:href "/logout"} (icon "power-off" "mr-3") "Log out"]]))
+
+
+(defn user-menu-mobile
+  "A menu that shows only on mobile devices"
+  [profile]
+  [:span.d-block.d-md-none.mobile-menu
+   [:strong.navbar-text (:name profile)]
+   (nav-list-item (nav-link ["/profile" "Profile"]))
+   (nav-list-item (nav-link ["/logout" "Log out"]))])
+
+(defn user-menu [profile]
+  [:span
+   (user-menu-dropdown profile)
+   (user-menu-mobile profile)])
 
 (defn html [profile]
   [:div.navbar-container
@@ -44,11 +58,9 @@
      navbar-button
      [:div.collapse.navbar-collapse {:id "navbarNav"}
       [:ul.navbar-nav.mr-auto
-       (navbar-links
-        ["/" "Home" true])]
+       (nav-list-item (nav-link ["/" "Home"]))]
       [:ul.navbar-nav.ml-auto
-       (if profile (user-menu profile) (anonymous-menu))]
-      ]]]])
+       (if profile (user-menu profile) (anonymous-menu))]]]]])
 
 (comment
   (hc/html (img/nav "image.jpg"))
