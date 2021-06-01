@@ -34,7 +34,7 @@
   [:div.content-panel {:class "w-5/12 mb-12"}
    [:div {:class "mb-5"}
     (link-to {:class "text-blue-500 font-medium"} url title)]
-   [:p content]])
+   [:p {:class "text-gray-700"} content]])
 
 (def index-content
   "Builds the markup for the content panel on the index page"

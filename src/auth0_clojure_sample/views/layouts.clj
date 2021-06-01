@@ -9,16 +9,17 @@
 
 (defn default
   [title profile & body]
-  (html5 {:class ""}
-         [:head
-          [:meta {:charset "utf-8"}]
-          [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
-          [:title title]
-          [:base {:href "/"}]
-          (map include-css (assets :css))]
-         [:body
-          (navbar/html profile)
-          [:div {:class "container mx-auto"}
-           body
-           footer/html
-           (map include-js (assets :js))]]))
+  (html5
+   [:head
+    [:meta {:charset "utf-8"}]
+    [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
+    [:title title]
+    [:base {:href "/"}]
+    (map include-css (:css assets))]
+   [:body
+    [:div {:class "flex flex-col h-screen"}
+     (navbar/html profile)
+     [:main {:class "container mx-auto flex-grow"}
+      body]
+     footer/html]
+    (map include-js (:js assets))]))
