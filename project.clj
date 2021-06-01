@@ -15,13 +15,19 @@
                  [environ "1.1.0"]]
   :plugins [[lein-ring "0.12.5"]
             [lein-environ "1.1.0"]
-            [lein-pprint "1.2.0"]]
+            [lein-pprint "1.2.0"]
+            [lein-tailwind "0.1.2"]]
   :ring {:handler auth0-clojure-sample.core/app}
   :target-path "target/%s"
+  :hooks [leiningen.tailwind]
   :profiles {:dev [:project/dev :profiles/dev]
              :test [:project/test :profiles/test]
            ;; only edit :profiles/* in profiles.clj
              :profiles/dev  {}
              :profiles/test {}
              :project/dev {}
-             :project/test {}})
+             :project/test {}}
+  :tailwind {:tailwind-dir "src/auth0_clojure_sample/css"
+             :output-dir "resources/public"
+             :tailwind-config "tailwind.config.js"
+             :styles [{:src "main.css" :dst "main.css"}]})

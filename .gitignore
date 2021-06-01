@@ -12,3 +12,6 @@ pom.xml.asc
 .hg/
 
 profiles.clj
+.DS_Store
+.calva
+.lsp
