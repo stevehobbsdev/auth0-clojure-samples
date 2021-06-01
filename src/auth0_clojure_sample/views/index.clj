@@ -1,14 +1,14 @@
 (ns auth0-clojure-sample.views.index
   (:require
-   [auth0-clojure-sample.views.components :as components]
    [hiccup.element :refer [link-to]]))
 
 (def index-hero
   "Defines the markup for the hero panel"
-  [:div {:class "text-center hero my-5"}
-   [:img {:class "mb-3 app-logo" :src "/logo.png" :alt "Clojure logo"}]
-   [:h1 {:class "mb-4"} "Clojure Sample Project"]
-   [:p.lead "This is a sample application demonstrating the authentication flow, using Clojure"]])
+  [:div {:class "flex flex-col items-center pb-40 border-b-2 border-gray-100 mb-10"}
+   [:img {:class "w-24 text-center" :src "/logo.png" :alt "Clojure logo"}]
+   [:h1 {:class "text-3xl mb-4 font-bold text-gray-700"} "Clojure Sample Project"]
+   [:p {:class "text-xl font-extralight mx-6"} "This is a sample application demonstrating the authentication flow, using "
+    [:a {:href "https://clojure.org/" :class "font-bold text-blue-700 underline"} "Clojure"]]])
 
 (def content-panel-data
   "Defines the data for the content panels. Returns an array of maps containing `title`, `url` and `content`."
@@ -31,20 +31,19 @@
   [{url :url
     title :title
     content :content}]
-  [:div.content-panel
-   [:h5 {:class "mb-3"}
-    (link-to url components/link-icon title)]
+  [:div.content-panel {:class "w-5/12 mb-12"}
+   [:div {:class "mb-5"}
+    (link-to {:class "text-blue-500 font-medium"} url title)]
    [:p content]])
 
 (def index-content
   "Builds the markup for the content panel on the index page"
-  [:div {:class "d-flex justify-content-between flex-wrap"}
+  [:div {:class "flex justify-between flex-wrap"}
    (map content-panel content-panel-data)])
 
 (defn html
   "Builds the markup for the index page"
   []
   [:div index-hero
-   [:div {:class "next-steps"}
-    [:h2 {:class "mt-5 text-center"} "What can I do?"]
-    index-content]])
+   [:h2 {:class "text-center text-xl font-bold text-gray-700 mb-16"} "What can I do next?"]
+   index-content])

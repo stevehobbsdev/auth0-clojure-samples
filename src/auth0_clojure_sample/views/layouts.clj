@@ -9,17 +9,16 @@
 
 (defn default
   [title profile & body]
-  (html5 {:class "h-100"}
+  (html5 {:class ""}
          [:head
           [:meta {:charset "utf-8"}]
           [:meta {:name "viewport" :content "width=device-width, initial-scale=1"}]
           [:title title]
           [:base {:href "/"}]
           (map include-css (assets :css))]
-         [:body {:class "h-100"}
+         [:body
           (navbar/html profile)
-          [:div {:class "d-flex flex-column h-100"}
-           [:div {:class "flex-grow-1 flex-shrink-1 container"}
-            body]
+          [:div {:class "container mx-auto"}
+           body
            footer/html
            (map include-js (assets :js))]]))
