@@ -3,7 +3,7 @@
             [auth0-clojure-sample.components.profile-image :as img]))
 
 (def navbar-button
-  [:button {:class "navbar-toggler"
+  [:button {:class ""
             :type "button"
             :data-toggle "collapse"
             :data-target "#navbarNav"}
@@ -13,14 +13,14 @@
   [:i (merge {:class (str "fa " "fa-" name " " class)} args)])
 
 (defn- nav-list-item [args & content]
-  [:li.nav-item args content])
+  [:li args content])
 
 (defn- nav-link [[url name]]
-  [:a.nav-link {:href url} name])
+  [:a {:href url} name])
 
 (defn anonymous-menu []
   (nav-list-item
-   [:a#qsLoginBtn.btn.btn-primary.btn-margin.w-md-100 {:href "/login"} "Log in"]))
+   [:a {:href "/login"} "Log in"]))
 
 (defn user-menu-dropdown [profile]
   (nav-list-item {:class "dropdown d-none d-md-block"}
@@ -45,16 +45,14 @@
    (user-menu-mobile profile)])
 
 (defn html [profile]
-  [:div.navbar-container
-   [:nav.navbar.navbar-expand-md.navbar-light.bg-light
-    [:div.container
-     [:div.navbar-brand.logo]
-     navbar-button
-     [:div.collapse.navbar-collapse {:id "navbarNav"}
-      [:ul.navbar-nav.mr-auto
-       (nav-list-item (nav-link ["/" "Home"]))]
-      [:ul.navbar-nav.ml-auto
-       (if profile (user-menu profile) (anonymous-menu))]]]]])
+  [:div {:class "shadow-md"}
+   [:nav {:class "bg-gray-100 p-5"}
+    [:div {:class "container mx-auto flex justify-between"}
+     [:ul {:class "flex"}
+      (let [menu-items [(nav-link ["/" "Home"])
+                        (when profile (nav-link ["/profile" "Profile"]))]]
+        (map #(nav-list-item {:class "mr-10"} %) menu-items))]
+     [:ul (when-not profile (anonymous-menu))]]]])
 
 (comment
   (hc/html (img/nav "image.jpg"))

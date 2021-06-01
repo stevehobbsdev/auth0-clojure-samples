@@ -19,7 +19,7 @@
    [:body
     [:div {:class "flex flex-col h-screen"}
      (navbar/html profile)
-     [:main {:class "container mx-auto flex-grow"}
+     [:main {:class "container mx-auto flex-grow mt-10"}
       body]
      footer/html]
     (map include-js (:js assets))]))
