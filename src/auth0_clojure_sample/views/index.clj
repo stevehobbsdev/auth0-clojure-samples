@@ -7,7 +7,7 @@
   [:div {:class "flex flex-col items-center pb-40 border-b-2 border-gray-100 mb-10"}
    [:img {:class "w-24 text-center" :src "/logo.png" :alt "Clojure logo"}]
    [:h1 {:class "text-3xl mb-4 font-bold text-gray-700"} "Clojure Sample Project"]
-   [:p {:class "text-xl font-extralight mx-6"} "This is a sample application demonstrating the authentication flow, using "
+   [:p {:class "text-xl font-extralight mx-6 text-center"} "This is a sample application demonstrating the authentication flow, using "
     [:a {:href "https://clojure.org/" :class "font-bold text-blue-700 underline"} "Clojure"]]])
 
 (def content-panel-data
@@ -31,14 +31,14 @@
   [{url :url
     title :title
     content :content}]
-  [:div.content-panel {:class "w-5/12 mb-12"}
+  [:div.content-panel {:class "md:w-5/12 mb-12"}
    [:div {:class "mb-5"}
     (link-to {:class "text-blue-500 font-medium"} url title)]
    [:p {:class "text-gray-700"} content]])
 
 (def index-content
   "Builds the markup for the content panel on the index page"
-  [:div {:class "flex justify-between flex-wrap"}
+  [:div {:class "md:flex justify-between md:flex-wrap p-5"}
    (map content-panel content-panel-data)])
 
 (defn html
